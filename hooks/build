@@ -4,6 +4,6 @@ export DOCKER_CLI_EXPERIMENTAL=enabled
 export DOCKER_BUILDKIT=1
 echo "Using BUILD_INFO=${BUILD_INFO}"
 docker buildx build \
-	--platform linux/amd64,linux/arm64/v8 \
+	--platform linux/amd64,linux/arm64 \
 	--progress plain --load \
 	-f $DOCKERFILE_PATH -t $IMAGE_NAME .
