@@ -1,9 +1,3 @@
 #!/bin/bash
 
-export DOCKER_CLI_EXPERIMENTAL=enabled
-export DOCKER_BUILDKIT=1
-echo "Using BUILD_INFO=${BUILD_INFO}"
-docker buildx build \
-	--platform linux/amd64,linux/arm64 \
-	--progress plain --load \
-	-f $DOCKERFILE_PATH -t $IMAGE_NAME .
+docker build -t $DOCKER_REPO:$GNUCASH_VERSION --build-arg GNUCASH_VERSION=$GNUCASH_VERSION .

@@ -19,6 +19,8 @@ RUN rm -rf python3.9 && ln -s python3 python3.9
 
 # gnucash build
 WORKDIR /root
-RUN wget https://downloads.sourceforge.net/sourceforge/gnucash/gnucash-4.5.tar.bz2 && bzcat gnucash-4.5.tar.bz2 | tar -C /root -xvf - && mkdir build-gnucash-4.5
-WORKDIR /root/build-gnucash-4.5
-RUN cmake -DCMAKE_PREFIX_PATH=$HOME/.local -DWITH_PYTHON=ON ../gnucash-4.5 && make && make install
+ARG GNUCASH_VERSION
+ENV GNUCASH_VERSION=$GNUCASH_VERSION
+RUN wget https://downloads.sourceforge.net/sourceforge/gnucash/gnucash-$GNUCASH_VERSION.tar.bz2 && bzcat gnucash-$GNUCASH_VERSION.tar.bz2 | tar -C /root -xvf - && mkdir build-gnucash-$GNUCASH_VERSION
+WORKDIR /root/build-gnucash-$GNUCASH_VERSION
+RUN cmake -DCMAKE_PREFIX_PATH=$HOME/.local -DWITH_PYTHON=ON ../gnucash-$GNUCASH_VERSION && make && make install
